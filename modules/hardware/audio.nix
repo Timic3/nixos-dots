@@ -1,0 +1,10 @@
+{
+  services.pipewire.wireplumber.extraConfig."51-disable-monitor-audio" = {
+    "monitor.alsa.rules" = [
+      {
+        matches = [ { "device.name" = "alsa_card.pci-0000_01_00.1"; } ];
+        actions.update-props."device.disabled" = true;
+      }
+    ];
+  };
+}
