@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "ai-overview-control": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793392022,
+        "narHash": "sha256-tqk1se7z6AzI2dwSN2u+EMVLbm78tVhp4c/Y9lyoCrc=",
+        "owner": "bernardopg",
+        "repo": "AiOverviewControl",
+        "rev": "c78072470b04563d491b8083f45275478facbb12",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bernardopg",
+        "repo": "AiOverviewControl",
+        "rev": "c78072470b04563d491b8083f45275478facbb12",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1789760033,
@@ -246,6 +263,7 @@
     },
     "root": {
       "inputs": {
+        "ai-overview-control": "ai-overview-control",
         "dank-pinentry": "dank-pinentry",
         "dux": "dux",
         "dux-greeter": "dux-greeter",
