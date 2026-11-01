@@ -17,6 +17,7 @@
     ./modules/desktop/dux-greeter.nix
 
     ./modules/system/home-manager.nix
+    ./modules/system/fonts.nix
 
     ./modules/apps/discord.nix
     ./modules/apps/spotify.nix
