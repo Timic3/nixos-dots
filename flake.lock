@@ -129,6 +129,26 @@
         "type": "github"
       }
     },
+    "dux-plugin-gpu-monitor": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793551620,
+        "narHash": "sha256-E/jaZubIeI7N4DIKfuAtM5AsQbPMxUU8Fuj7nkGhYjc=",
+        "owner": "Timic3",
+        "repo": "dux-plugin-gpu-monitor",
+        "rev": "94d2049ba1bff3349b368ecb0912626bab8b6bb6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Timic3",
+        "repo": "dux-plugin-gpu-monitor",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -267,6 +287,7 @@
         "dank-pinentry": "dank-pinentry",
         "dux": "dux",
         "dux-greeter": "dux-greeter",
+        "dux-plugin-gpu-monitor": "dux-plugin-gpu-monitor",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",

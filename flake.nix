@@ -27,6 +27,10 @@
       url = "github:bernardopg/AiOverviewControl/c78072470b04563d491b8083f45275478facbb12";  # v2.2.2
       flake = false;
     };
+    dux-plugin-gpu-monitor = {
+      url = "github:Timic3/dux-plugin-gpu-monitor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix/60182817ee048ac94b4c68ea76d5ef2e8aac730d";
       inputs.nixpkgs.follows = "nixpkgs";
