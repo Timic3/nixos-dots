@@ -23,6 +23,10 @@
       url = "github:augustocdias/dank-pinentry/3316dd9de7e5423b4e3fe6d565564cfef4c5f6af";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix/60182817ee048ac94b4c68ea76d5ef2e8aac730d";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, ... }@inputs: {
