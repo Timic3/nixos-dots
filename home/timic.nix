@@ -38,9 +38,11 @@ in
     includes = [ "hosts/*" ];
     settings = {
       "github.com" = {
-        IdentityFile = "~/.ssh/timic-github";
+        IdentityFile = "~/.ssh/keys/timic-github";
         IdentitiesOnly = true;
       };
+      # Fix server not having colors due to kitty's xterm-kitty terminfo
+      "*".SetEnv.TERM = "xterm-256color";
     };
   };
 
