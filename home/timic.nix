@@ -58,6 +58,11 @@ in
       runtimeInputs = [ pkgs.sops ];
       text = builtins.readFile ../scripts/sops/ssh-host.sh;
     })
+    (pkgs.writeShellApplication {
+      name = "sops-kube";
+      runtimeInputs = [ pkgs.sops pkgs.yq-go ];
+      text = builtins.readFile ../scripts/sops/kube.sh;
+    })
   ];
 
   programs.gpg.enable = true;
@@ -78,15 +83,14 @@ in
       nixos-switch = "sudo nixos-rebuild switch --flake ~/.nixos-dots#nixos";
       nixos-update = "nix flake update --flake ~/.nixos-dots";
     };
-    # Makes `sops ssh-host ...` run sops-ssh-host; anything else reaches sops unchanged
+    # Makes `sops ssh-host ...` and `sops kube ...` run their helpers; anything else reaches sops unchanged
     initExtra = ''
       sops() {
-        if [[ $1 == ssh-host ]]; then
-          shift
-          sops-ssh-host "$@"
-        else
-          command sops "$@"
-        fi
+        case $1 in
+          ssh-host) shift; sops-ssh-host "$@" ;;
+          kube) shift; sops-kube "$@" ;;
+          *) command sops "$@" ;;
+        esac
       }
     '';
   };
