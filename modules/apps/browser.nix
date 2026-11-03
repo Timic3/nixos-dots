@@ -12,6 +12,9 @@ in
 
   environment.systemPackages = [ pkgs.brave ];
 
+  # Bubblewrapped apps (Discord, Steam) would otherwise start Brave in their sandbox, where /etc/brave doesn't exist
+  xdg.portal.xdgOpenUsePortal = true;
+
   # Per-user because ~/.config/mimeapps.list overrides xdg.mime.defaultApplications
   home-manager.sharedModules = [{
     xdg.mimeApps = {
