@@ -19,6 +19,7 @@
     ./modules/system/home-manager.nix
     ./modules/system/fonts.nix
     ./modules/system/secrets.nix
+    ./modules/system/wireguard.nix
 
     ./modules/apps/discord.nix
     ./modules/apps/spotify.nix
