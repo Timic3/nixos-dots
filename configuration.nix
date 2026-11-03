@@ -25,6 +25,7 @@
     ./modules/apps/browser.nix
     ./modules/apps/ai.nix
     ./modules/apps/vscode.nix
+    ./modules/apps/gaming.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
