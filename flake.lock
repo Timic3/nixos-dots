@@ -199,6 +199,22 @@
         "type": "github"
       }
     },
+    "gitalias": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786048905,
+        "narHash": "sha256-nLXqRA6iB2ng/ESeu4dmccTNMg4wYPvBYJ2MlY1ci/A=",
+        "owner": "GitAlias",
+        "repo": "gitalias",
+        "rev": "7653169af41a9fa93d6f5c5e2aedb4c7ce801840",
+        "type": "github"
+      },
+      "original": {
+        "owner": "GitAlias",
+        "repo": "gitalias",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -288,6 +304,7 @@
         "dux": "dux",
         "dux-greeter": "dux-greeter",
         "dux-plugin-gpu-monitor": "dux-plugin-gpu-monitor",
+        "gitalias": "gitalias",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",

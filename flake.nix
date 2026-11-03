@@ -35,6 +35,10 @@
       url = "github:Mic92/sops-nix/60182817ee048ac94b4c68ea76d5ef2e8aac730d";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gitalias = {
+      url = "github:GitAlias/gitalias";
+      flake = false;
+    };
   };
 
   outputs = { nixpkgs, ... }@inputs: {

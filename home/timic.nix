@@ -29,6 +29,7 @@ in
       key = "8C53AD94F33CCEFC";
       signByDefault = true;  # Signs commits and tags
     };
+    includes = [ { path = "${inputs.gitalias}/gitalias.txt"; } ];  # Aliases (git a, git s, git l, ...)
   };
 
   services.ssh-agent.enable = true;
@@ -77,14 +78,31 @@ in
     installPlugin = false;
   };
 
-  programs.bash = {
+  programs.bash = let
+    # Basic GitAlias aliases that also get a g<alias> shell alias (gs → git s)
+    gitShortcuts = [
+      "a" "aa" "ap"
+      "b"
+      "c" "ca" "cam" "cane" "cm"
+      "co" "cob" "sw" "swc"
+      "cp"
+      "d" "ds"
+      "f" "p" "pf" "pr"
+      "l" "lo" "lg"
+      "m"
+      "rb" "rbi" "rba" "rbc"
+      "s" "ss" "ssb"
+    ];
+  in {
     enable = true;
     shellAliases = {
       nixos-switch = "sudo nixos-rebuild switch --flake ~/.nixos-dots#nixos";
       nixos-update = "nix flake update --flake ~/.nixos-dots";
-    };
-    # Makes `sops ssh-host ...` and `sops kube ...` run their helpers; anything else reaches sops unchanged
+      k = "kubectl";
+      kctx = "kubectl config set-context";
+    } // lib.listToAttrs (map (name: lib.nameValuePair "g${name}" "git ${name}") gitShortcuts);
     initExtra = ''
+      # Makes `sops ssh-host ...` and `sops kube ...` run their helpers; anything else reaches sops unchanged
       sops() {
         case $1 in
           ssh-host) shift; sops-ssh-host "$@" ;;
@@ -92,6 +110,10 @@ in
           *) command sops "$@" ;;
         esac
       }
+
+      # Tab completion for every alias above
+      source ${pkgs.complete-alias}/bin/complete_alias
+      complete -F _complete_alias ${lib.concatStringsSep " " (lib.attrNames config.programs.bash.shellAliases)}
     '';
   };
 
