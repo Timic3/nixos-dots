@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, osConfig, lib, pkgs, inputs, ... }:
 let
   configs = "${config.home.homeDirectory}/.nixos-config";
   link = path: config.lib.file.mkOutOfStoreSymlink "${configs}/${path}";
@@ -35,6 +35,7 @@ in
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
+    includes = [ "hosts/*" ];
     settings = {
       "github.com" = {
         IdentityFile = "~/.ssh/timic-github";
@@ -42,6 +43,20 @@ in
       };
     };
   };
+
+  home.file = lib.mapAttrs'
+    (name: secret: lib.nameValuePair ".ssh/hosts/${lib.removePrefix "ssh-hosts/" name}" {
+      source = config.lib.file.mkOutOfStoreSymlink secret.path;
+    })
+    (lib.filterAttrs (name: _: lib.hasPrefix "ssh-hosts/" name) osConfig.sops.secrets);
+
+  home.packages = [
+    (pkgs.writeShellApplication {
+      name = "sops-ssh-host";
+      runtimeInputs = [ pkgs.sops pkgs.git ];
+      text = builtins.readFile ../scripts/sops/ssh-host.sh;
+    })
+  ];
 
   programs.gpg.enable = true;
   services.gpg-agent = {
@@ -61,6 +76,17 @@ in
       nixos-switch = "sudo nixos-rebuild switch --flake ~/.nixos-dots#nixos";
       nixos-update = "nix flake update --flake ~/.nixos-dots";
     };
+    # Makes `sops ssh-host ...` run sops-ssh-host; anything else reaches sops unchanged
+    initExtra = ''
+      sops() {
+        if [[ $1 == ssh-host ]]; then
+          shift
+          sops-ssh-host "$@"
+        else
+          command sops "$@"
+        fi
+      }
+    '';
   };
 
   programs.starship = {
