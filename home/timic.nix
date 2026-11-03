@@ -55,7 +55,7 @@ in
   home.packages = [
     (pkgs.writeShellApplication {
       name = "sops-ssh-host";
-      runtimeInputs = [ pkgs.sops pkgs.git ];
+      runtimeInputs = [ pkgs.sops ];
       text = builtins.readFile ../scripts/sops/ssh-host.sh;
     })
   ];

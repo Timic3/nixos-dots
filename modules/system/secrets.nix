@@ -1,21 +1,23 @@
 { config, inputs, lib, pkgs, ... }:
 let
-  # Private ssh hosts, one sops file each. Git drops the folder when it's empty, hence the check.
-  sshHostsDir = ../../secrets/ssh/hosts;
-  sshHosts = lib.optionals (builtins.pathExists sshHostsDir)
-    (lib.fileset.toList (lib.fileset.fileFilter (file: file.hasExt "yaml") sshHostsDir));
+  # Outside the repo, since it's public. sops-nix reads the files when the system activates.
+  secretsDir = "${config.users.users.timic.home}/.nixos-secrets";
+
+  # Private ssh hosts, one sops file each in ssh/hosts/. Add new ones with `sops ssh-host <alias>`.
+  sshHosts = [ "alfheim" "vanaheim" ];
 in
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFile = "${secretsDir}/secrets.yaml";
+    validateSopsFiles = false;  # Only works on files in the Nix store
     age.keyFile = "${config.users.users.timic.home}/.config/sops/age/keys.txt";
 
-    secrets = lib.listToAttrs (map (file: {
-      name = "ssh-hosts/${lib.removeSuffix ".yaml" (baseNameOf file)}";
+    secrets = lib.listToAttrs (map (host: {
+      name = "ssh-hosts/${host}";
       value = {
-        sopsFile = file;
+        sopsFile = "${secretsDir}/ssh/hosts/${host}.yaml";
         key = "config";
         owner = "timic";
       };
