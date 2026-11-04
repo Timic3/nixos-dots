@@ -31,6 +31,10 @@
       url = "github:Timic3/dux-plugin-gpu-monitor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wallpaper-engine = {
+      url = "git+file:///home/timic/dev/scratch/wallpaper-engine";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix/60182817ee048ac94b4c68ea76d5ef2e8aac730d";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -15,6 +15,7 @@
     ./modules/desktop/hyprland.nix
     ./modules/desktop/dux-shell.nix
     ./modules/desktop/dux-greeter.nix
+    ./modules/desktop/wallpaper-engine.nix
 
     ./modules/system/home-manager.nix
     ./modules/system/fonts.nix
