@@ -29,6 +29,7 @@
     ./modules/apps/vscode.nix
     ./modules/apps/gaming.nix
     ./modules/apps/kubernetes.nix
+    ./modules/apps/containers.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
