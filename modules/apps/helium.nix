@@ -6,6 +6,15 @@ in
 {
   environment.systemPackages = [ pkgs.helium ];
 
+  # Helium only loads Widevine (DRM: Crunchyroll, Netflix, ...) through this per-profile pointer. Its own component
+  # download should write it but doesn't (imputnet/helium-linux#331), so point it at nixpkgs' copy of Google's module.
+  home-manager.sharedModules = [{
+    xdg.configFile."net.imput.helium/WidevineCdm/latest-component-updated-widevine-cdm" = {
+      text = builtins.toJSON { Path = "${pkgs.widevine-cdm}/share/google/chrome/WidevineCdm"; };
+      force = true;  # Helium may rewrite it, take it back on switch
+    };
+  }];
+
   # Brave's Chromium-generic policies from browser.nix, copied. The Brave* ones don't exist here.
   environment.etc."${managed}/privacy.json".text = builtins.toJSON {
     MetricsReportingEnabled = false;
