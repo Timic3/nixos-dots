@@ -45,10 +45,24 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [ ./configuration.nix ];
+  outputs = { self, nixpkgs, ... }@inputs:
+    let
+      # Own packages: pkgs/<name>/package.nix, laid out like nixpkgs' pkgs/by-name
+      ownPackages = pkgs: nixpkgs.lib.packagesFromDirectoryRecursive {
+        inherit (pkgs) callPackage;
+        directory = ./pkgs;
+      };
+    in
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          { nixpkgs.overlays = [ (final: _: ownPackages final) ]; }  # As pkgs.<name> in modules
+        ];
+      };
+
+      # The same builds the system uses, as flake outputs for nix-update and CI
+      packages.x86_64-linux = ownPackages self.nixosConfigurations.nixos.pkgs;
     };
-  };
 }
