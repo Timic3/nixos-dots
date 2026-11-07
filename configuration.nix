@@ -56,10 +56,17 @@
 
   users.users.timic = {
     isNormalUser = true;
+    shell = pkgs.zsh;  # Configured in home/timic.nix
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
       tree
     ];
+  };
+
+  programs.zsh = {
+    enable = true;  # Required for a zsh login shell
+    enableGlobalCompInit = false;  # home-manager runs compinit; skip the duplicate in /etc/zshrc
+    promptInit = "";  # oh-my-posh sets the prompt; skip NixOS's default theme
   };
 
   environment.systemPackages = with pkgs; [
