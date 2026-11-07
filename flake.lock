@@ -308,7 +308,8 @@
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "wallpaper-engine": "wallpaper-engine"
       }
     },
     "rust-overlay": {
@@ -366,6 +367,26 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "wallpaper-engine": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793812912,
+        "narHash": "sha256-kfV3FATxyijiS3M3QcHZewLI2CT3vnIw8kuSX0bMlc4=",
+        "ref": "refs/heads/master",
+        "rev": "562e2943f597a3199de897ef26659cce18dfb1ff",
+        "revCount": 1,
+        "type": "git",
+        "url": "file:///home/timic/dev/scratch/wallpaper-engine"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/timic/dev/scratch/wallpaper-engine"
       }
     }
   },

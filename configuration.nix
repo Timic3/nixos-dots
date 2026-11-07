@@ -30,9 +30,14 @@
     ./modules/apps/gaming.nix
     ./modules/apps/kubernetes.nix
     ./modules/apps/containers.nix
+    ./modules/apps/blender.nix
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    max-jobs = 2;
+    cores = 16;
+  };
   nixpkgs.config.allowUnfree = true;
 
   hardware.enableRedistributableFirmware = true;
