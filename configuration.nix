@@ -31,6 +31,7 @@
     ./modules/apps/kubernetes.nix
     ./modules/apps/containers.nix
     ./modules/apps/blender.nix
+    ./modules/apps/helium.nix
   ];
 
   nix.settings = {
