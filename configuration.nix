@@ -34,6 +34,7 @@
     ./modules/apps/blender.nix
     ./modules/apps/comfyui.nix
     ./modules/apps/helium.nix
+    ./modules/apps/viewers.nix
   ];
 
   nix.settings = {
