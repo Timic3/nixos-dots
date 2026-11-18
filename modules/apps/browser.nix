@@ -2,7 +2,7 @@
 let
   managed = "brave/policies/managed";
   recommended = "brave/policies/recommended";
-  browsers = [ "brave-browser.desktop" "firefox.desktop" ];  # First one installed wins
+  browsers = [ "helium.desktop" "brave-browser.desktop" "firefox.desktop" ];  # First one installed wins
 in
 {
   programs.firefox = {
@@ -12,7 +12,7 @@ in
 
   environment.systemPackages = [ pkgs.brave ];
 
-  # Bubblewrapped apps (Discord, Steam) would otherwise start Brave in their sandbox, where /etc/brave doesn't exist
+  # Bubblewrapped apps (Discord, Steam) would otherwise start the browser in their sandbox, where its /etc policies don't exist
   xdg.portal.xdgOpenUsePortal = true;
 
   # Per-user because ~/.config/mimeapps.list overrides xdg.mime.defaultApplications
