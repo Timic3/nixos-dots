@@ -1,15 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, pkgs5090, ... }:
 let
   # nixpkgs' Blender has no CUDA, so Cycles can't use the GPU. Only the CUDA build has OptiX, and it isn't
-  # in any binary cache, so it compiles locally after every nixpkgs bump. Building kernels for the 5090 (sm_120)
-  # alone keeps that short. CUDA is turned on for Blender only, not the whole package set (pkgsForCudaArch does that).
-  pkgs5090 = import pkgs.path {
-    inherit (pkgs.stdenv.hostPlatform) system;
-    config = {
-      allowUnfree = true; # OptiX
-      cudaCapabilities = [ "12.0" ];
-    };
-  };
+  # in any binary cache, so it compiles locally after every nixpkgs bump (for the 5090 only, see nvidia.nix).
   blender = pkgs5090.blender.override { cudaSupport = true; };
 in
 {
