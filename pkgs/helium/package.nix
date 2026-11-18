@@ -18,11 +18,11 @@ let
 in
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "helium";
-  version = "0.21.1.1";
+  version = "0.21.3.1";
 
   src = fetchurl rec {
     url = "https://github.com/imputnet/helium-linux/releases/download/${finalAttrs.version}/helium-${finalAttrs.version}-x86_64_linux.tar.xz";
-    hash = "sha256-bNfyQBU8ucDN+ie/GmZR3crnOomK/ESak90Q2oO0vUU=";
+    hash = "sha256-iPPFOiNxguhyrDBhzIwSnnWuy86Erq2DQiXYEDCWwlQ=";
 
     # Runs whenever the hash gets computed, so a new version only gets a hash if Helium signed it.
     # pubkey.asc: BE67 7C19 89D3 5EAB 2C5F  26C9 3516 01AD 01D6 378E, the key in upstream's README that also signs their apt repo.
