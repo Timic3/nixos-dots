@@ -2,7 +2,7 @@
 let
   # kubeconfigs, one sops file per cluster. Add new ones with `sops kube <name>`.
   kubeconfigsDir = "${config.users.users.timic.home}/.nixos-secrets/kube";
-  kubeconfigs = [ "vanaheim" ];
+  kubeconfigs = [ "vanaheim" "alfheim" ];
 in
 {
   sops.secrets = lib.listToAttrs (map (cluster: {
