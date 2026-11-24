@@ -35,6 +35,7 @@
     ./modules/apps/comfyui.nix
     ./modules/apps/helium.nix
     ./modules/apps/viewers.nix
+    ./modules/apps/torrent.nix
   ];
 
   nix.settings = {
